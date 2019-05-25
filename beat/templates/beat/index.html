@@ -1,0 +1,89 @@
+{% include "beat/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static "beat/index.css" %}">
+
+{% block body %}
+
+{% if search_text %}
+  <h2 id="st">Searched for: "{{ search_text }}"</h2>
+  <hr>
+{% endif %}
+<div class="main-body">
+  {% if search_text %}
+  <div class="main-body-1" id="yoyo">
+  {% else %}
+  <div class="main-body-1">
+  {% endif %}
+    <h3>Users</h3>
+    {% for user in users %}
+    <a href="{% url 'beat:profile' user.id %}">
+      <div id="mini-user">
+        <img src="{{ user.profile.dp.url }}" id="mini-dp" oncontextmenu="return false;">
+        <div id="miniu"><strong>{{ user.username }}</strong>
+          {% if user.is_superuser %}
+            <span title="Admin of Beginner's Beat">
+              <img src="https://img.icons8.com/color/48/000000/verified-account.png" height="20px" width="20px">
+            </span>
+          {% endif %}
+          <div id="user-name">
+            {{ user.first_name }} {{ user.last_name }}
+          </div>
+        </div>
+      </div>
+    </a>
+    <br>
+    {% endfor %}
+  </div>
+
+  <div class="main-body-1-mobile">
+    {% for user in users %}
+    <a href="{% url 'beat:profile' user.id %}">
+      <div id="mini-user-m">
+        <img src="{{ user.profile.dp.url }}" id="mini-dp-m" oncontextmenu="return false;">
+        <br>
+        <div id="miniu-m"><strong>{{ user.username|truncatechars:25 }}</strong>
+          {% if user.is_superuser %}
+            <span title="Admin of Beginner's Beat">
+              <img src="https://img.icons8.com/color/48/000000/verified-account.png" height="15px" width="15px">
+            </span>
+          {% endif %}
+          <div id="user-name-m">
+            {{ user.first_name }} {{ user.last_name }}
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="main-body-2">
+    {% for album in albums %}
+      <div class="c-it">
+        <a href="{% url 'beat:detail' album.id %}">
+          <img src="{{ album.cover_dp.url }}" id="cover_dp" oncontextmenu="return false;">
+          <div id="ta">
+            <h4>{{ album.title }}</h4><br>
+            Author: <a href="{% url 'beat:profile' album.author.id %}" id="lfa">{{ album.author }}</a>
+            <br>
+            Uploaded on: {{ album.date }}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="main-body-3">
+    <h3>Random Music</h3>
+    {% for music in musics %}
+      <div class="main-music">
+        <div id="music-t"><strong><span title="{{ music.title }}">{{ music.title|truncatechars:50 }}</span></strong></div>
+        <audio controls id="music-a" controlsList="nodownload">
+          <source src="{{ music.file.url }}">
+        </audio>
+        <div id="music-dt">
+          Uploaded on: {{ music.date }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}

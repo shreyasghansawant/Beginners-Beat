@@ -1,0 +1,214 @@
+body{
+  background-color: #F5F5F5;
+}
+.br-c{
+  display: none;
+}
+#bioit-m{
+  display: none;
+}
+.main-div{
+  margin: 0px 35px;
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+.p-div{
+  margin: 15px;
+}
+#dp{
+  width: 100%;
+  height: 290px;
+  //border-radius: 2.5px;
+}
+#name-it{
+  font-size: 50px;
+  word-wrap: break-word;
+}
+#fn{
+  font-size: 45px;
+}
+.i-div{
+  text-align: center;
+  margin: 15px;
+}
+#at{
+  text-align: center;
+  font-size: 30px;
+  margin: 10px;
+}
+#mailit{
+  font-size: 25px;
+  word-wrap: break-word;
+}
+#bioit{
+  word-wrap: break-word;
+}
+#m-u{
+  border: solid black 1px;
+  text-decoration: none;
+  color: black;
+  padding: 7px 42px;
+  background-color: #89CFF0;
+  float: left;
+  font-size: 15px;
+  margin: 5px;
+  border-radius: 5px;
+}
+#m-d{
+  float: right;
+  border: solid black 1px;
+  text-decoration: none;
+  color: black;
+  padding: 7.5px 32px;
+  background-color: #FA8072;
+  font-size: 15px;
+  margin: 5px;
+  border-radius: 5px;
+}
+#m-u:hover{
+  background-color: #99FFFF;
+}
+#m-d:hover{
+  background-color: red;
+  cursor: pointer;
+}
+#m-u:active{
+  background-color: blue;
+}
+#m-d:active{
+  background-color: orange;
+}
+#m-e{
+  border: solid black 1px;
+  text-decoration: none;
+  color: black;
+  padding: 5px 42.5px;
+  background-color: lightyellow;
+  font-size: 15px;
+  margin: 5px;
+  border-radius: 5px;
+}
+#m-e:hover{
+  background-color: yellow;
+}
+#m-e:active{
+  background-color: orange;
+}
+#m-l{
+  border: solid black 1px;
+  text-decoration: none;
+  color: black;
+  padding: 5px 10px;
+  background-color: #FFEFD5;
+  font-size: 15px;
+  margin: 5px;
+  border-radius: 5px;
+}
+#m-l:hover{
+  background-color: orange;
+}
+#m-l:active{
+  background-color: yellow;
+}
+
+.pro-file{
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-auto-rows: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  #m-e-m{
+    display: none;
+  }
+  #m-l-m{
+    display: none;
+  }
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 600px) {
+  .pro-file{
+    grid-template-columns: 100%;
+  }
+  #name-it{
+    font-size: 25px;
+  }
+  #fn{
+    font-size: 22px;
+  }
+  #mailit{
+    font-size: 18px;
+  }
+  .main-div{
+    grid-template-columns: 30% 70%;
+    margin: 0px;
+  }
+  #dp{
+    height: 150px;
+    width: 150px;
+  }
+  .p-div{
+    text-align: center;
+    margin: 10px;
+  }
+  .i-div{
+    margin: 10px;
+  }
+  #at{
+    font-size: 20px;
+  }
+  #m-e{
+    display: none;
+  }
+  #m-l{
+    display: none;
+  }
+  .br-m{
+    display: none;
+  }
+  #m-e-m{
+    border: solid black 1px;
+    text-decoration: none;
+    color: black;
+    padding: 5px 42.5px;
+    background-color: lightyellow;
+    font-size: 15px;
+    margin-left: 75px;
+    border-radius: 5px;
+  }
+  #m-e-m:hover{
+    background-color: yellow;
+  }
+  #m-e-m:active{
+    background-color: orange;
+  }
+  #m-l-m{
+    border: solid black 1px;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    background-color: #FFEFD5;
+    font-size: 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+  }
+  #m-l-m:hover{
+    background-color: orange;
+  }
+  #m-l-m:active{
+    background-color: yellow;
+  }
+  .br-c{
+    display: block;
+  }
+  #bioit-m{
+    display: block;
+    word-wrap: break-word;
+    margin: 10px;
+  }
+  #bioit-pro{
+    display: none;
+  }
+}

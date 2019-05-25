@@ -1,0 +1,66 @@
+{% include "beat/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static "beat/index.css" %}">
+<link rel="stylesheet" href="{% static 'beat/profile.css' %}">
+
+{% block body %}
+<div class="main-div">
+  <div class="p-div">
+    <img src="{{ p_user.profile.dp.url }}" id="dp" oncontextmenu="return false;">
+  </div>
+  <div class="i-div">
+    <h3 id="name-it">{{ p_user.username }}
+      {% if p_user.is_superuser %}
+        <span title="Admin of Beginner's Beat">
+          <img src="https://img.icons8.com/color/48/000000/verified-account.png" height="25px" width="25px">
+        </span>
+      {% endif %}
+    </h3>
+    <br>
+    <span id="fn">{{ p_user.first_name|capfirst }} {{ p_user.last_name|capfirst }}</span>
+    <br>
+    <br>
+    <strong id="mailit">{{ p_user.email }}</strong>
+    <br>
+    <br>
+    Date of birth: {{ p_user.profile.dob }}
+    <br>
+    <br class="br-m">
+    <div id="bioit-pro">Bio: {{ p_user.profile.bio }}</div>
+  </div>
+</div>
+<div id="bioit-m">Bio: {{ p_user.profile.bio }}</div>
+<hr>
+<h3 id="at">Albums by {{ p_user.username }}</h3>
+<div class="pro-file">
+  <div class="main-body-2-pro">
+    {% for album in albums %}
+      <div class="c-it">
+        <a href="{% url 'beat:detail' album.id %}">
+          <img src="{{ album.cover_dp.url }}" id="cover_dp_pro" oncontextmenu="return false;">
+          <div id="ta-pro">
+            <h4>{{ album.title }}</h4><br>
+            Author: <a href="{% url 'beat:profile' album.author.id %}" id="lfa">{{ album.author }}</a>
+            <br>
+            Uploaded on: {{ album.date }}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="main-body-3">
+    <h3>{{ p_user.username }}'s Music</h3>
+    {% for music in musics %}
+      <div class="main-music">
+        <div id="music-t"><strong><span title="{{ music.title }}">{{ music.title|truncatechars:50 }}</span></strong></div>
+        <audio controls id="music-a" controlsList="nodownload">
+          <source src="{{ music.file.url }}">
+        </audio>
+        <div id="music-dt">
+          Uploaded on: {{ music.date }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}

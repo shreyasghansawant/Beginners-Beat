@@ -1,0 +1,205 @@
+{% include "beat/base.html" %}
+{% load humanize %}
+{% load static %}
+<link rel="stylesheet" href="{% static "beat/detail_video.css" %}">
+
+{% block body %}
+<div class="main-body">
+
+  <div class="main-body-1">
+    <video poster="{{ video.thumbnail.url }}" controls id="videoit" oncontextmenu="return false;" controlsList="nodownload">
+      <source src="{{ video.file.url }}">
+    </video>
+    <div id="info">
+      <h4 id="at">{{ video.title }}</h4>
+      {{ video.views|intcomma }} view{{ video.views|pluralize }}
+    </div>
+    <hr>
+    <div class="comment-body">
+      <strong>{{ num_comments|intcomma }} Comment{{ num_comments|pluralize }}</strong>
+      <form id="comment-form" action="{% url 'beat:comment-video' video.id %}" method="get">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+          <img src="{{ user.profile.dp.url }}" id="my-img-for-c" oncontextmenu="return false;">
+        {% endif %}
+        <!--<input type="text" name="comment_album" size="60" style="font-size:16pt;" id="comment-text-area">-->
+        <textarea name="comment_video" rows="2" cols="60" id="comment-text-area" style="font-size:13pt;"></textarea>
+        <button type="submit" id="comment-btn">Comment</button>
+      </form>
+      <hr><br>
+      {% for comment in comments %}
+        <div class="comment-area">
+          <img src="{{ comment.user.profile.dp.url }}" id="img-of-c-user" oncontextmenu="return false;">
+          <div id="comment-info">
+            <strong><a href="{% url 'beat:profile' comment.user.id %}" id="c-a">{{ comment.user.username }}</a></strong>
+            {% if comment.user == user or video.author == user %}
+              <form action="{% url 'beat:delete-comment-video' video.id comment.id %}" method="post" id="d-c">
+                {% csrf_token %}
+                <button type="submit" id="d-c-btn">Delete</button>
+              </form>
+            {% endif %}
+            <div id="c-dt">{{ comment.date_time }}</div>
+            <p id="comment-text">{{ comment.text|linebreaksbr }}</p>
+          </div>
+        </div>
+        <br>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <div class="main-body-2">
+    <a href="{% url "beat:detail" album.id %}" class="a-a-a-a">
+      <div id="mini-album">
+        <img src="{{ album.cover_dp.url }}" id="mini-album-dp" oncontextmenu="return false;">
+        <div id="mini-album-u">
+          <strong><span title="{{ album.title }}">{{ album.title|truncatechars:28 }}</span></strong>
+          <div id="ud-of-a">Uploaded on: {{ album.date }}</div>
+        </div>
+      </div>
+    </a>
+    <hr class="hr-m">
+    <div class="like-and-user">
+      <div class="like-it-div">
+        <form action="{% url 'beat:like-video' video.id %}" method="post" id="likeit">
+          {% csrf_token %}
+          {% if un_like == "liked" %}
+            <button type="submit" id="likeitbtn-u">Unlike</button>
+          {% else %}
+            <button type="submit" id="likeitbtn">Like</button>
+          {% endif %}
+        </form>
+        <strong id="likes"><a href="{% url 'beat:liked-by-video' video.id %}" style="text-decoration: none;">{{ likes|intcomma }} Like{{ likes|pluralize }}</a></strong>
+      </div>
+      <a href="{% url 'beat:profile' video.author.id %}" class="a-a-a">
+        <div id="mini-user">
+          <img src="{{ video.author.profile.dp.url }}" id="mini-dp" oncontextmenu="return false;">
+          <div id="miniu"><strong>{{ video.author.username }}</strong>
+            {% if video.author.is_superuser %}
+              <span title="Admin of Beginner's Beat">
+                <img src="https://img.icons8.com/color/48/000000/verified-account.png" height="20px" width="20px">
+              </span>
+            {% endif %}
+            <div id="user-name">
+              {{ video.author.first_name }} {{ video.author.last_name }}
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div id="dt-a">Uploaded on: {{ video.date }} at {{ video.time }}</div>
+    <hr class="hr-c">
+    <a href="{% url "beat:detail" album.id %}" class="a-a-a-a" id="a-mobile">
+      <div id="mini-album">
+        <img src="{{ album.cover_dp.url }}" id="mini-album-dp" oncontextmenu="return false;">
+        <div id="mini-album-u">
+          <strong><span title="{{ album.title }}">{{ album.title|truncatechars:28 }}</span></strong>
+          <div id="ud-of-a">Uploaded on: {{ album.date }}</div>
+        </div>
+      </div>
+    </a>
+    <hr>
+    <div id="dscript">
+      <div id="d-a">Description</div>
+      <p id="d-a-p">{{ video.description|linebreaksbr }}</p>
+    </div>
+    <hr>
+    <h3 id="mini-videos-main-title">More Videos from this Album</h3>
+    <div class="more-videos">
+      {% for mini_video in more_videos %}
+        {% if mini_video == video %}
+        {% else %}
+          <a href="{% url 'beat:detail-video' mini_video.id %}" id="mini-video-link">
+            <div class="mini-video">
+              <img src="{{ mini_video.thumbnail.url }}" id="mini-thumb" oncontextmenu="return false;">
+              <div id="mini-video-info">
+                <strong id="mini-video-title"><span title="{{ mini_video.title }}">{{ mini_video.title|truncatechars:42 }}</span></strong>
+                <div id="mini-video-mini-info">
+                  {{ mini_video.views|intcomma }} view{{ mini_video.views|pluralize }} <br>
+                  Uploaded on: {{ mini_video.date }}
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <hr>
+    <h3 id="mini-videos-main-title">Videos from {{ video.author.username }}'s other Albums</h3>
+    <div class="more-videos">
+      {% for mini_video in more_user_videos %}
+        {% if mini_video.album == video.album %}
+        {% else %}
+          <a href="{% url 'beat:detail-video' mini_video.id %}" id="mini-video-link">
+            <div class="mini-video">
+              <img src="{{ mini_video.thumbnail.url }}" id="mini-thumb" oncontextmenu="return false;">
+              <div id="mini-video-info">
+                <strong id="mini-video-title"><span title="{{ mini_video.title }}">{{ mini_video.title|truncatechars:42 }}</span></strong>
+                <div id="mini-video-mini-info">
+                  {{ mini_video.views|intcomma }} view{{ mini_video.views|pluralize }} <br>
+                  Uploaded on: {{ mini_video.date }}
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <hr>
+    <h3 id="mini-videos-main-title">More Videos from Beginner's Beat</h3>
+    <div class="more-videos">
+      {% for mini_video in all_more_videos %}
+        {% if mini_video.author == album.author %}
+        {% else %}
+          <a href="{% url 'beat:detail-video' mini_video.id %}" id="mini-video-link">
+            <div class="mini-video">
+              <img src="{{ mini_video.thumbnail.url }}" id="mini-thumb" oncontextmenu="return false;">
+              <div id="mini-video-info">
+                <strong id="mini-video-title"><span title="{{ mini_video.title }}">{{ mini_video.title|truncatechars:42 }}</span></strong>
+                <div id="mini-video-mini-info">
+                  {{ mini_video.views|intcomma }} view{{ mini_video.views|pluralize }} <br>
+                  Uploaded on: {{ mini_video.date }}
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <hr>
+  <div class="comment-body-pro">
+    <strong>{{ num_comments|intcomma }} Comment{{ num_comments|pluralize }}</strong>
+    <form id="comment-form" action="{% url 'beat:comment-video' video.id %}" method="get">
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+        <img src="{{ user.profile.dp.url }}" id="my-img-for-c" oncontextmenu="return false;">
+      {% endif %}
+      <!--<input type="text" name="comment_album" size="60" style="font-size:16pt;" id="comment-text-area">-->
+      <textarea name="comment_video" rows="2" cols="60" id="comment-text-area" style="font-size:13pt;"></textarea>
+      <textarea name="comment_video" rows="2" cols="33" id="comment-text-area-pro" style="font-size:13pt;"></textarea>
+      <button type="submit" id="comment-btn">Comment</button>
+      <br class="br-c">
+      <br class="br-c">
+    </form>
+    <hr><br>
+    {% for comment in comments %}
+      <div class="comment-area">
+        <img src="{{ comment.user.profile.dp.url }}" id="img-of-c-user" oncontextmenu="return false;">
+        <div id="comment-info">
+          <strong><a href="{% url 'beat:profile' comment.user.id %}" id="c-a">{{ comment.user.username }}</a></strong>
+          {% if comment.user == user or video.author == user %}
+            <form action="{% url 'beat:delete-comment-album' album.id comment.id %}" method="post" id="d-c">
+              {% csrf_token %}
+              <button type="submit" id="d-c-btn">Delete</button>
+            </form>
+          {% endif %}
+          <div id="c-dt">{{ comment.date_time }}</div>
+          <p id="comment-text">{{ comment.text|linebreaksbr }}</p>
+        </div>
+      </div>
+      <br>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}

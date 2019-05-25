@@ -1,0 +1,58 @@
+{% include "beat/base.html" %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'beat/form.css' %}">
+
+{% block body %}
+<div class="a">
+  <div class="a1">
+    <h1 class="title">Sign up</h1>
+    {% if message %}
+      <div id="messageit">
+        <strong>{{ message }}</strong>
+      </div>
+    {% endif %}
+    <form class="f" action="{% url 'beat:signup' %}" method="post">
+      {% csrf_token %}
+      {% for f in form %}
+        {{ f.label_tag }} &nbsp; &nbsp;
+        {{ f }}
+        {% if f.help_text %}
+          <small style="color: grey;">{{ f.help_text }}</small>
+        {% endif %}
+        {% for error in f.errors %}
+          <br>
+          <small style="color: red;">{{ error }}</small>
+        {% endfor %}
+        <br>
+        <br>
+      {% endfor %}
+      <button type="submit" id="button">Sign up</button>
+    </form>
+    <strong id="lg-link-g">Have an account? <a href="{% url 'beat:login' %}" class="linkit">Log in</a></strong>
+  </div>
+  <div class="a2">
+    <h3 class="api-title">- - OR Continue with - -</h3>
+    <h3 class="api-title-pro">- - - OR Continue with - - -</h3>
+    <a href="{% url 'social:begin' 'google-oauth2' %}" class="api" id="google">
+      <img src="{% static 'images/google.png' %}" height="50px">
+      <div class="api-it">Google</div>
+    </a>
+    <br>
+    <a href="{% url 'social:begin' 'instagram' %}" class="api" id="instagram">
+      <img src="{% static 'images/instagram.png' %}" height="50px">
+      <div class="api-it">Instagram</div>
+    </a>
+    <br>
+    <a href="{% url 'social:begin' 'facebook' %}" class="api" id="facebook">
+      <img src="{% static 'images/facebook.png' %}" height="50px">
+      <div class="api-it">Facebook</div>
+    </a>
+    <br>
+    <a href="{% url 'social:begin' 'github' %}" class="api" id="github">
+      <img src="{% static 'images/octocat.png' %}" height="50px">
+      <div class="api-it">Github</div>
+    </a>
+  </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,75 @@
+{% include "beat/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static "beat/index.css" %}">
+<link rel="stylesheet" href="{% static 'beat/profile.css' %}">
+
+{% block body %}
+<div class="main-div">
+  <div class="p-div">
+    <img src="{{ user.profile.dp.url }}" id="dp" oncontextmenu="return false;">
+    profile picture size: {{ user.profile.dp.size|filesizeformat }}
+  </div>
+  <div class="i-div">
+    <h3 id="name-it">{{ user.username }}
+      {% if user.is_superuser %}
+        <span title="Admin of Beginner's Beat">
+          <img src="https://img.icons8.com/color/48/000000/verified-account.png" height="25px" width="25px">
+        </span>
+      {% endif %}
+    </h3>
+    <br>
+    <span id="fn">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+    <br>
+    <br>
+    <strong id="mailit">{{ user.email }}</strong>
+    <br>
+    <br>
+    Date of birth: {{ user.profile.dob }}
+    <br>
+    <br>
+    <div id="bioit">Bio: {{ user.profile.bio }}</div>
+    <br>
+    <br class="br-m">
+    <a href="{% url 'beat:edit-profile' %}" id="m-e">Edit profile</a>
+    <a href="{% url 'beat:liked-albums' %}" id="m-l">Posts You've Liked</a>
+  </div>
+</div>
+<a href="{% url 'beat:edit-profile' %}" id="m-e-m">Edit profile</a>
+<a href="{% url 'beat:liked-albums' %}" id="m-l-m">Posts You've Liked</a>
+<br class="br-c">
+<br class="br-c">
+<hr>
+<h3 id="at">My Albums</h3>
+<div class="pro-file">
+  <div class="main-body-2-pro">
+    {% for album in albums %}
+      <div class="c-it">
+        <a href="{% url 'beat:edit-album' album.id %}">
+          <img src="{{ album.cover_dp.url }}" id="cover_dp_pro" oncontextmenu="return false;">
+          cover picture size: {{ album.cover_dp.size|filesizeformat }}
+          <div id="ta-pro">
+            <h4>{{ album.title }}</h4><br>
+            Author: <a href="{% url 'beat:profile' album.author.id %}" id="lfa">{{ album.author }}</a>
+            <br>
+            Uploaded on: {{ album.date }}
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="main-body-3">
+    <h3>My Music</h3>
+    {% for music in musics %}
+      <div class="main-music">
+        <div id="music-t"><strong><span title="{{ music.title }}">{{ music.title|truncatechars:50 }}</span></strong></div>
+        <audio controls id="music-a" controlsList="nodownload">
+          <source src="{{ music.file.url }}">
+        </audio>
+        <div id="music-dt">
+          Uploaded on: {{ music.date }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}

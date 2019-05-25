@@ -1,0 +1,66 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://icons8.com/icon/102561/verified-account">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'beat/base.css' %}" type="text/css">
+  <title>Document</title>
+  <link rel="icon" href="{% static "images/logo.png" %}">
+</head>
+<body>
+  <nav>
+    <div id="name">
+      <a href="{% url 'beat:index' %}">Beginner's Beat</a>
+    </div>
+    <form action="{% url 'beat:search' %}" method="get" id="sf">
+      <input type="text" name="search_text" placeholder="Search..." style="font-size: 16pt; border-radius: 8px;" id="ssb">
+      <button type="submit" id="sb"><i class="fa fa-search"></i></button>
+    </form>
+    {% if user.is_authenticated %}
+    <ul>
+      <li>
+        <a href="{% url 'beat:index' %}">Home</a>
+      </li>
+      <li>
+        <a href="{% url 'beat:my-profile' %}">My Profile</a>
+      </li>
+      <li>
+        <a href="{% url 'beat:add-album' %}">Add Album</a>
+      </li>
+      <li>
+        <a href="{% url 'beat:about' %}">About</a>
+      </li>
+      <form action="{% url 'beat:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" id="logout">Log Out</button>
+      </form>
+    </ul>
+    {% else %}
+    <ul id="for-mobile">
+      <li>
+        <a href="{% url 'beat:index' %}">Home</a>
+      </li>
+      <li>
+        <a href="{% url 'beat:signup' %}">Sign up</a>
+      </li>
+      <li>
+        <a href="{% url 'beat:login' %}">Log in</a>
+      </li>
+      <li>
+        <a href="{% url 'beat:about' %}">About</a>
+      </li>
+    </ul>
+    {% endif %}
+  </nav>
+  {% block body %}
+  {% endblock body %}
+</body>
+</html>

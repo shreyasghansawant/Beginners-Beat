@@ -1,0 +1,89 @@
+*{
+  margin: 0px;
+}
+body{
+  font-family: 'Roboto', sans-serif;
+}
+nav{
+  display: flex;
+  background-color: #333;
+  justify-content: space-between;
+  font-family: 'Architects Daughter', cursive;
+}
+ul{
+  display: flex;
+  padding: 0px;
+  list-style-type: none;
+}
+ul li{
+  padding: 15px 25px;
+}
+ul li a, #name a{
+  text-decoration: none;
+  color: white;
+}
+ul li a:hover{
+  color: grey;
+}
+#name{
+  padding: 7.5px 20px;
+  font-family: 'Satisfy', cursive;
+  font-size: 25px;
+}
+#logout{
+  background-color: #333;
+  color: white;
+  font-size: 15px;
+  border: solid black 0px;
+  padding: 15px 25px;
+  font-family: 'Architects Daughter', cursive;
+}
+#logout:hover{
+  color: grey;
+  cursor: pointer;
+}
+#sf{
+  padding-top: 7.5px;
+}
+#sb{
+  background-color: lightgreen;
+  text-align: center;
+  padding: 7.5px 15px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+#sbb:active{
+  border: solid black 1px;
+}
+#sb:hover{
+  background-color: #98FB98;
+  cursor: pointer;
+}
+#sb:active{
+  background-color: green;
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 600px) {
+  ul li, #logout{
+    padding: 10px 18px;
+    border: 0.5px solid grey;
+  }
+  nav{
+    flex-wrap: wrap;
+  }
+  #ssb{
+    width: 265px;
+  }
+  #sf{
+    padding-top: 2.5px;
+  }
+  #name{
+    padding: 2.5px 5px;
+    font-size: 23px;
+  }
+  #for-mobile li{
+    padding: 10px 37px;
+  }
+}

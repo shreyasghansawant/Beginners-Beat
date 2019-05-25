@@ -1,0 +1,134 @@
+.liked-it{
+  display: grid;
+  grid-template-columns: 68% 32%;
+}
+#liked-albums{
+  text-align: center;
+  margin: 15px;
+  font-size: 30px;
+}
+#mini-videos-main-title{
+  margin: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+.mini-video{
+  display: grid;
+  grid-template-columns: 37.5% 62.5%;
+  text-align: left;
+  background-color: black;
+  margin: 7.5px 0px;
+  border-radius: 2.5px;
+  margin: 7.5px;
+}
+#mini-video-link{
+  color: white;
+  text-decoration: none;
+}
+#mini-thumb{
+  height: 100px;
+  width: 100%;
+  border-radius: 5px;
+}
+#mini-video-info{
+  margin: 9px;
+}
+#mini-video-title{
+  word-wrap: break-word;
+}
+#mini-video-mini-info{
+  font-size: 14px;
+  color: grey;
+  margin-top: 10px;
+}
+.main-body-2-pro{
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto minmax(0px, 1fr);
+}
+.c-it{
+  margin: 5px;
+  border: solid grey 0.5px;
+  background-color: #EDEAE0;
+  border-radius: 5px;
+  color: grey;
+}
+.c-it:hover{
+  background-color: #DCDCDC;
+  cursor: pointer;
+}
+.c-it:active{
+  background-color: grey;
+}
+.c-it a{
+  color: grey;
+  text-decoration: none;
+}
+h4{
+  color: black;
+  word-wrap: break-word;
+  font-size: 16px;
+}
+#lfa{
+  color: blue;
+  word-wrap: break-word;
+}
+#lfa:hover{
+  text-decoration: underline;
+}
+#lfa:active{
+  color: red;
+}
+#ta{
+  padding: 7.5px;
+  font-size: 14px;
+}
+#cover_dp{
+  height: 225px;
+  width: 100%;
+  border-radius: 5px;
+}
+.more-videos{
+  float: right;
+  overflow-y: auto;
+  max-height: 650px;
+  position: sticky;
+  top: 0;
+  margin: 10px;
+  background-color: grey;
+  border: solid black 1px;
+  border-radius: 10px;
+}
+.more-videos::-webkit-scrollbar{
+  width: 10px;
+}
+.more-videos::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+  background-color: white;
+}
+.more-videos::-webkit-scrollbar-thumb{
+  background-color: #002e63;
+  border-radius: 10px;
+  border: solid white 0.5px;
+}
+.more-videos::-webkit-scrollbar-thumb:hover{
+  background-color: black;
+  border: solid grey 0px;
+}
+.more-videos::-webkit-scrollbar-thumb:active{
+  background-color: #004242;
+  border: solid white 0.5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .liked-it{
+    grid-template-columns: 100%;
+  }
+  .main-body-2-pro{
+    grid-template-columns: 50% 50%;
+  }
+  #liked-albums{
+    font-size: 25px;
+  }
+}

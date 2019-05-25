@@ -1,0 +1,41 @@
+{% include "beat/base.html" %}
+{% load static %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static "beat/liked_it.css" %}">
+
+{% block body %}
+<h4 id="liked-albums">Albums and Videos You've Liked</h4>
+<div class="liked-it">
+  <div class="main-body-2-pro">
+    {% for like in liked %}
+      <div class="c-it">
+        <a href="{% url 'beat:detail' like.album.id %}">
+          <img src="{{ like.album.cover_dp.url }}" id="cover_dp">
+          <div id="ta">
+            <h4>{{ like.album.title }}</h4><br>
+            Author: <a href="{% url 'beat:profile' like.album.author.id %}" id="lfa">{{ like.album.author }}</a>
+            <br>
+            Uploaded on:
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="more-videos">
+    {% for likeit in liked_videos %}
+      <a href="{% url 'beat:detail-video' likeit.video.id %}" id="mini-video-link">
+        <div class="mini-video">
+          <img src="{{ likeit.video.thumbnail.url }}" id="mini-thumb" oncontextmenu="return false;">
+          <div id="mini-video-info">
+            <strong id="mini-video-title"><span title="{{ likeit.video.title }}">{{ likeit.video.title|truncatechars:42 }}</span></strong>
+            <div id="mini-video-mini-info">
+              {{ likeit.video.views|intcomma }} view{{ likeit.video.views|pluralize }} <br>
+              Uploaded on: {{ likeit.video.date }}
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}

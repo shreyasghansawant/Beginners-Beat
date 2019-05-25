@@ -1,0 +1,29 @@
+{% include "beat/base.html" %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'beat/form.css' %}">
+
+{% block body %}
+{% if updateit %}
+<h1 class="title">Edit Video</h1>
+{% else %}
+<h1 class="title">Add Video</h1>
+{% endif %}
+<div>
+  <form class="f" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for f in form %}
+      {{ f.label_tag }} &nbsp; &nbsp;
+      {{ f }}
+      <br>
+      <br>
+    {% endfor %}
+    <!--Album: &nbsp; &nbsp;<a href="url of album">{{ album.title }}</a>-->
+    {% if updateit %}
+      <button type="submit" id="button">Edit Video</button>
+    {% else %}
+      <button type="submit" id="button">Add Video</button>
+    {% endif %}
+  </form>
+</div>
+{% endblock body %}

@@ -1,0 +1,171 @@
+body{
+  background-color: #F5F5F5;
+}
+.a{
+  display: grid;
+  grid-template-columns: 55% 45%;
+}
+.f{
+  margin: 30px;
+  margin-left: 125px;
+  font-size: 17.5px;
+}
+.title{
+  margin-top: 30px;
+  margin-left: 125px;
+  font-size: 50px;
+  font-family: 'Special Elite', cursive;
+}
+.api-title{
+  margin: 15px;
+  font-size: 30px;
+  font-family: 'Special Elite', cursive;
+}
+.api-title-pro{
+  display: none;
+}
+#button{
+  margin-top: 20px;
+  background-color: lightgreen;
+  padding: 15px;
+  font-size: 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+#button:hover{
+  cursor: pointer;
+  background-color: #98FB98;
+}
+#button:active{
+  cursor: progress;
+  background-color: green;
+}
+strong{
+  margin-left: 125px;
+}
+.linkit{
+  color: blue;
+  text-decoration: none;
+}
+.linkit:hover{
+  text-decoration: underline;
+}
+#cp{
+  margin: 5px;
+  text-decoration: none;
+  background-color: #89CFF0;
+  padding: 15px;
+  margin-left: 125px;
+  border-radius: 10px;
+  border: solid black 1px;
+  color: black;
+  float: left;
+  font-size: 15px;
+}
+#da-f{
+  float: left;
+}
+#da{
+  margin: 5px;
+  background-color: #FA8072;
+  padding: 15.5px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: solid black 1px;
+}
+#cp:hover{
+  background-color: #99FFFF;
+}
+#da:hover{
+  background-color: red;
+  cursor: pointer;
+}
+.a2{
+  padding: 10px 0px;
+  border-left: 1px solid black;
+}
+.api-it{
+  padding: 15px 0px;
+}
+.api{
+  display: grid;
+  grid-template-columns: 40% 60%;
+  padding: 10px 35px;
+  width: 300px;
+  color: black;
+  text-decoration: none;
+  font-size: 25px;
+  border-radius: 10px;
+  margin: 5px 15px;
+  border: 1px solid black;
+}
+#github{
+  background-color: grey;
+}
+#google{
+  background-color: white;
+}
+#facebook{
+  background-color: #1F75FE;
+}
+#twitter{
+  background-color: lightblue;
+}
+#instagram{
+  background-color: #FE4EDA;
+}
+#messageit{
+  margin: 5px;
+  color: red;
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 600px) {
+  .a{
+    grid-template-columns: 100%;
+    margin-left: 15px;
+  }
+  .a1{
+    font-size: 18px;
+  }
+  .title{
+    margin-left: 0px;
+    text-align: center;
+    font-size: 30px;
+    margin: 15px;
+  }
+  .f{
+    margin-left: 15px;
+  }
+  #button{
+    float: left;
+  }
+  #lg-link-l{
+    margin-left: 65px;
+  }
+  #lg-link-g{
+    margin-left: 82px;
+  }
+  .a2{
+    border: none;
+    margin-left: 25px;
+  }
+  .api-title{
+    display: none;
+  }
+  .api-title-pro{
+    display: block;
+    margin: 15px;
+    font-family: 'Special Elite', cursive;
+    font-size: 25px;
+  }
+  #cp{
+    margin: 0px;
+    margin-left: 50px;
+  }
+  #da{
+    margin: 0px;
+    margin-left: 10px
+  }
+}

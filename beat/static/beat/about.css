@@ -1,0 +1,97 @@
+.main-body{
+  display: grid;
+  grid-template-columns: 62.5% 37.5%;
+}
+.about{
+  margin: 15px;
+  margin-left: 125px;
+}
+h3{
+  font-size: 50px;
+  font-family: 'Special Elite', cursive;
+}
+#note{
+  font-size: 24px;
+}
+#problem{
+  font-size: 18px;
+  color: red;
+}
+.can-do ul{
+  display: inline;
+  list-style-type: disc;
+}
+#fd{
+  font-size: 18px;
+}
+#tip{
+  font-size: 18px;
+  text-decoration: underline;
+}
+#source-code{
+  margin: 15px 25px;
+}
+#source-code h5{
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+#source-code a{
+  text-decoration: none;
+}
+#contact{
+  font-size: 18px;
+  margin: 0px 25px;
+  margin-top: 20px;
+}
+#contact h6{
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+.can-do{
+  margin: 20px;
+  margin-right: 100px;
+}
+.can-do li{
+  margin: 20px 0px;
+}
+#can-do-title{
+  font-size: 24px;
+}
+.can-do-mobile{
+  display: none;
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 600px) {
+  .main-body{
+    grid-template-columns: 100%;
+  }
+  .about{
+    margin-left: 20px;
+  }
+  .can-do-mobile{
+    display: block;
+  }
+  .can-do{
+    display: none;
+  }
+  .about h3{
+    font-size: 40px;
+  }
+  #note{
+    font-size: 20px;
+  }
+  #problem{
+    font-size: 18px;
+  }
+  #can-do-title{
+    font-size: 20px;
+  }
+  #source-code h5{
+    font-size: 20px;
+  }
+  #contact h6{
+    font-size: 20px;
+  }
+}

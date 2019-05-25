@@ -1,0 +1,111 @@
+{% include "beat/base.html" %}
+{% load humanize %}
+{% load static %}
+<link rel="stylesheet" href="{% static "beat/detail.css" %}">
+
+{% block body %}
+<div class="main-body">
+  <div class="main-body-1">
+    <img src="{{ album.cover_dp.url }}" id="cover_dp" oncontextmenu="return false;">
+    <div id="at"><strong>{{ album.title }}</strong></div>
+    <hr>
+    <div class="like-it-div">
+      <form action="{% url 'beat:like-album' album.id %}" method="post" id="likeit">
+        {% csrf_token %}
+        {% if un_like == "liked" %}
+          <button type="submit" id="likeitbtn-u">Unlike</button>
+        {% else %}
+          <button type="submit" id="likeitbtn">Like</button>
+        {% endif %}
+      </form>
+      <strong id="likes"><a href="{% url 'beat:liked-by-album' album.id %}" style="text-decoration: none;">{{ likes|intcomma }} Like{{ likes|pluralize }}</a></strong>
+    </div>
+    <hr>
+    <a href="{% url 'beat:profile' album.author.id %}" id="a-a-a">
+      <div id="mini-user">
+        <img src="{{ album.author.profile.dp.url }}" id="mini-dp" oncontextmenu="return false;">
+        <div id="miniu"><strong>{{ album.author.username }}</strong>
+          {% if album.author.is_superuser %}
+            <span title="Admin of Beginner's Beat">
+              <img src="https://img.icons8.com/color/48/000000/verified-account.png" height="20px" width="20px">
+            </span>
+          {% endif %}
+          <div id="user-name">
+            {{ album.author.first_name }} {{ album.author.last_name }}
+          </div>
+        </div>
+      </div>
+    </a>
+    <div id="dt-a">Uploaded on: {{ album.date }}<br id="br-for-ud">at {{ album.time }}</div>
+    <hr>
+    <div id="d-a">Description</div>
+    <p id="d-a-p">{{ album.description|linebreaksbr }}</p>
+  </div>
+
+  <div class="main-body-2">
+    <div class="music-video">
+      <div class="music">
+        {% for music in musics %}
+          <div class="main-music">
+            <div id="m-t"><strong>{{ music.title }}</strong></div>
+            <audio controls id="m-a" controlsList="nodownload">
+              <source src="{{ music.file.url }}">
+            </audio>
+            <div id="m-dt">
+              Uploaded on: {{ music.date }} at {{ music.time }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="video">
+        {% for video in videos %}
+          <div class="main-video">
+            <a href="{% url 'beat:detail-video' video.id %}">
+              <img src="{{ video.thumbnail.url }}" id="v-thumb" oncontextmenu="return false;">
+              <div id="v-t"><strong><span title="{{ video.title }}">{{ video.title|truncatechars:40 }}</span></strong></div>
+              <div id="v-d">
+                {{ video.views|intcomma }} view{{ video.views|pluralize }} <br>
+                Uploaded on: {{ video.date }}
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+    <div class="comment-body">
+      <strong>{{ num_comments|intcomma }} Comment{{ num_comments|pluralize }}</strong>
+      <form id="comment-form" action="{% url 'beat:comment-album' album.id %}" method="get">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+          <img src="{{ user.profile.dp.url }}" id="my-img-for-c" oncontextmenu="return false;">
+        {% endif %}
+        <!--<input type="text" name="comment_album" size="60" style="font-size:16pt;" id="comment-text-area">-->
+        <textarea name="comment_album" rows="2" cols="60" id="comment-text-area" style="font-size:13pt;"></textarea>
+        <textarea name="comment_album" rows="2" cols="37.5" id="comment-text-area-pro" style="font-size:13pt;"></textarea>
+        <button type="submit" id="comment-btn">Comment</button>
+        <br class="br-c">
+        <br class="br-c">
+      </form>
+      <hr><br>
+      {% for comment in comments %}
+        <div class="comment-area">
+          <img src="{{ comment.user.profile.dp.url }}" id="img-of-c-user" oncontextmenu="return false;">
+          <div id="comment-info">
+            <strong><a href="{% url 'beat:profile' comment.user.id %}" id="c-a">{{ comment.user.username }}</a></strong>
+            {% if comment.user == user %}
+              <form action="{% url 'beat:delete-comment-album' album.id comment.id %}" method="post" id="d-c">
+                {% csrf_token %}
+                <button type="submit" id="d-c-btn">Delete</button>
+              </form>
+            {% endif %}
+            <div id="c-dt">{{ comment.date_time }}</div>
+            <p id="comment-text">{{ comment.text|linebreaksbr }}</p>
+          </div>
+        </div>
+        <br>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
