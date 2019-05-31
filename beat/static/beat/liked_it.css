@@ -131,4 +131,7 @@ h4{
   #liked-albums{
     font-size: 25px;
   }
+  #cover_dp{
+    height: 175px;
+  }
 }
