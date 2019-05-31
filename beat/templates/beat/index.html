@@ -37,7 +37,7 @@
   </div>
 
   <div id="num_users">
-    {{ num_users|intcomma }} User{{ num_users|pluralize }}
+    <strong>{{ num_users|intcomma }} User{{ num_users|pluralize }}</strong>
   </div>
   <div class="main-body-1-mobile">
     {% for user in users %}
