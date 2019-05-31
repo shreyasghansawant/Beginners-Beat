@@ -33,5 +33,5 @@ while playing the made music in it.
 4) You can also share some cool videos created by you, just for fun. 
 
 If you have any problem, Feel Free to Contact Me :
-Email: shreyasghansawant@gmail.com 
-Phone: 7620979186
+*Email: shreyasghansawant@gmail.com 
+*Phone: 7620979186
