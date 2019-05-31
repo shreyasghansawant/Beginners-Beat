@@ -337,8 +337,8 @@ body{
   background-color: orange;
 }
 
-#comment-text-area-pro{
-  display: none;
+#comment-text-area{
+  width: 650px;
 }
 .br-c{
   display: none;
@@ -372,11 +372,13 @@ body{
     grid-template-columns: 50% 50%;
     border-top: 1px solid black;
     margin: 10px;
+    grid-auto-rows: 235px;
   }
   .video-pro{
     grid-template-columns: 50% 50%;
     border-top: 1px solid black;
     margin: 10px;
+    grid-auto-rows: 275px;
   }
   #br-for-ud{
     display: none;
@@ -385,25 +387,22 @@ body{
     grid-template-columns: 100%;
   }
   #comment-text-area{
-    display: none;
-  }
-  #comment-text-area-pro{
-    display: block;
+    width: 300px;
   }
   .comment-area{
     grid-template-columns: 17.5% 82.5%;
   }
   #m-u-m{
-    padding: 7.5px 90px;
+    padding: 7.5px 55px;
   }
   #m-d-m{
-    padding: 7.5px 80px;
+    padding: 7.5px 45px;
   }
   #m-u{
-    padding: 7.5px 35px;
+    padding: 7.5px 20px;
   }
   #m-d{
-    padding: 7.5px 25px;
+    padding: 7.5px 10px;
   }
   #comment-btn{
     margin: 6px;
@@ -413,13 +412,13 @@ body{
     margin-left: 0px;
   }
   #m-u-a{
-    padding: 7.5px 175px;
+    padding: 7.5px 125px;
   }
   #m-d-a{
-    padding: 7.5px 165px;
+    padding: 7.5px 115px;
   }
   #likes{
-    margin: 15px 30px;
+    margin: 0px 0px;
   }
   #mini-user{
     margin: 7.5px;
@@ -435,7 +434,7 @@ body{
     height: 50px;
   }
   #miniu{
-    margin: 20px 15px;
+    margin: 5px 5px;
     word-wrap: break-word;
   }
   #a-a-a{
@@ -453,5 +452,14 @@ body{
     margin-left: 5px;
     text-align: left;
     word-wrap: break-word;
+  }
+  .like-it-div{
+    display: block;
+  }
+  #v-thumb{
+    height: 100px;
+  }
+  .comment-body{
+    margin-left: 15px;
   }
 }
