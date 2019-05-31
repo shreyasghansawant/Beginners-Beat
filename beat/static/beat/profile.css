@@ -142,12 +142,12 @@ body{
     font-size: 18px;
   }
   .main-div{
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 100%;
     margin: 0px;
   }
   #dp{
-    height: 150px;
-    width: 150px;
+    height: 125px;
+    width: 125px;
   }
   .p-div{
     text-align: center;
@@ -172,10 +172,10 @@ body{
     border: solid black 1px;
     text-decoration: none;
     color: black;
-    padding: 5px 42.5px;
+    padding: 5px 40px;
     background-color: lightyellow;
     font-size: 15px;
-    margin-left: 75px;
+    margin-left: 23px;
     border-radius: 5px;
   }
   #m-e-m:hover{
