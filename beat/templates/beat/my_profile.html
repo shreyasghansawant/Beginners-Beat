@@ -4,9 +4,17 @@
 <link rel="stylesheet" href="{% static 'beat/profile.css' %}">
 
 {% block body %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="messageit-s">
+      <center>
+      <strong>{{ message }}</strong>
+    </div>
+  {% endfor %}
+{% endif %}
 <div class="main-div">
   <div class="p-div">
-    <img src="{{ user.profile.dp.url }}" id="dp" oncontextmenu="return false;">
+    <img src="{{ user.profile.dp.url }}" id="dp" oncontextmenu="return false;"><br class="br-c">
     profile picture size: {{ user.profile.dp.size|filesizeformat }}
   </div>
   <div class="i-div">
