@@ -7,10 +7,13 @@
 <div class="a">
   <div class="a1">
     <h1 class="title">Sign up</h1>
-    {% if message %}
-      <div id="messageit">
-        <strong>{{ message }}</strong>
-      </div>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="messageit-d">
+          <center>
+          <strong>{{ message }}</strong>
+        </div>
+      {% endfor %}
     {% endif %}
     <form class="f" action="{% url 'beat:signup' %}" method="post">
       {% csrf_token %}
@@ -33,7 +36,7 @@
   </div>
   <div class="a2">
     <h3 class="api-title">- - OR Continue with - -</h3>
-    <h3 class="api-title-pro">- - - OR Continue with - - -</h3>
+    <h3 class="api-title-pro">- - OR Continue with - -</h3>
     <a href="{% url 'social:begin' 'google-oauth2' %}" class="api" id="google">
       <img src="{% static 'images/google.png' %}" height="50px">
       <div class="api-it">Google</div>
@@ -41,16 +44,16 @@
     <br>
     <a href="{% url 'social:begin' 'instagram' %}" class="api" id="instagram">
       <img src="{% static 'images/instagram.png' %}" height="50px">
-      <div class="api-it">Instagram</div>
+      <div class="api-it">Under Developement</div>
     </a>
     <br>
     <a href="{% url 'social:begin' 'facebook' %}" class="api" id="facebook">
       <img src="{% static 'images/facebook.png' %}" height="50px">
-      <div class="api-it">Facebook</div>
+      <div class="api-it">Under Developement</div>
     </a>
     <br>
     <a href="{% url 'social:begin' 'github' %}" class="api" id="github">
-      <img src="{% static 'images/octocat.png' %}" height="50px">
+      <img src="{% static 'images/Octocat.png' %}" height="50px">
       <div class="api-it">Github</div>
     </a>
   </div>
