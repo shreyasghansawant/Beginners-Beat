@@ -1,5 +1,6 @@
 {% include "beat/base.html" %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static "beat/index.css" %}">
 
 {% block body %}
@@ -14,7 +15,7 @@
   {% else %}
   <div class="main-body-1">
   {% endif %}
-    <h3>Users</h3>
+    <h3>{{ num_users|intcomma }} User{{ num_users|pluralize }}</h3>
     {% for user in users %}
     <a href="{% url 'beat:profile' user.id %}">
       <div id="mini-user">
