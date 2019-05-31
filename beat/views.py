@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 
 def signup_form(request):
+    storage = messages.get_messages(request)
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -17,20 +18,20 @@ def signup_form(request):
             all_users = User.objects.all()
             for one_user in all_users:
                 if one_user.email == instance.email:
-                    form = SignUpForm(instance=instance)
-                    message = "This email is taken by another account."
-                    return render(request, 'beat/signup.html', {
-                        'form': form,
-                        'message': message,
-                    })
+                    messages.error(request, 'This email is taken by another account.')
+                    return redirect('beat:signup')
             user = form.save()
             #profile = Profile.objects.create(user=user)
             #profile.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(request, "Welcome to Beginner's Beat, Your account is created successfully!")
             return redirect('beat:edit-profile')
     else:
         form = SignUpForm()
-    return render(request, 'beat/signup.html', {'form': form})
+    return render(request, 'beat/signup.html', {
+            'form': form,
+            'messages': storage,
+        })
 
 def login_form(request):
     if request.method == "POST":
@@ -72,17 +73,19 @@ def change_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)
+            form.save()
             messages.success(request, 'Password Changed Successfully!')
-        else:
-            messages.error(request, 'Error Occured, Retry!')
+            update_session_auth_hash(request, form.user)
+            return redirect('beat:my-profile')
+        #else:
+            #messages.error(request, 'Error Occured, Retry!')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'beat/change_password.html', {'form': form})
 
 @login_required(login_url="beat:login")
 def edit_profile(request):
+    storage = messages.get_messages(request)
     try:
         profile = Profile.objects.get(user=request.user)
         if profile:
@@ -92,6 +95,7 @@ def edit_profile(request):
                 if form.is_valid() and form_user.is_valid():
                     form.save()
                     form_user.save()
+                    messages.success(request, "Profile Updated Successfully!")
                     return redirect('beat:my-profile')
             else:
                 form = ProfileForm(instance=profile)
@@ -99,6 +103,7 @@ def edit_profile(request):
             return render(request, 'beat/edit_profile.html', {
                 'form': form,
                 'form_user': form_user,
+                'messages': storage,
             })
     except Exception:
         new_profile = Profile.objects.create(user=request.user)
@@ -108,17 +113,20 @@ def edit_profile(request):
         text = "Hello " + user.first_name + ", \n\nThank you for joining us.\nYour Beginner's Beat account has been successfully created. \n\nListen to the music of beginner's (maybe the future composers/artists) and enjoy it."
         me = settings.EMAIL_HOST_USER
         send_mail(subject, text, me, [user.email,], fail_silently=True)
+        messages.success(request, "Welcome to Beginner's Beat, Your account is created successfully!")
         return redirect('beat:edit-profile')
 
 @login_required(login_url="beat:login")
 def my_profile(request):
     user = request.user
+    storage = messages.get_messages(request)
     albums = Album.objects.filter(author=user).order_by('-date', '-time')
     musics = Music.objects.filter(author=user)
     return render(request, 'beat/my_profile.html', {
         'user': user,
         'albums': albums,
         'musics': musics,
+        'messages': storage,
     })
 
 def profile(request, user_id):
@@ -157,7 +165,7 @@ def add_album(request):
             instance = form.save(commit=False)
             instance.author = request.user
             instance.save()
-            return redirect('beat:detail', instance.id)
+            return redirect('beat:edit-album', instance.id)
     else:
         form = AlbumForm()
     return render(request, 'beat/add_album.html', {'form': form})
@@ -170,7 +178,8 @@ def update_album(request, album_id):
         form = AlbumForm(request.POST or None, request.FILES or None, instance=album)
         if form.is_valid():
             form.save()
-            return redirect('beat:detail', album.id)
+            messages.success(request, "Album Updated Successfully!")
+            return redirect('beat:edit-album', album.id)
     else:
         form = AlbumForm(instance=album)
     return render(request, 'beat/add_album.html', {
@@ -185,6 +194,7 @@ def delete_album(request, album_id):
         album = get_object_or_404(Album, pk=album_id)
         if album.author == request.user:
             album.delete()
+            messages.success(request, "Album Deleted Successfully!")
             return redirect('beat:my-profile')
 
 @login_required(login_url="beat:login")
@@ -209,6 +219,7 @@ def edit_album(request, album_id):
         #})
     ###############################################################
     user = request.user
+    storage = messages.get_messages(request)
     #album = Album.objects.get(pk=album_id)
     album = get_object_or_404(Album, pk=album_id)
     if album.author == user:
@@ -233,6 +244,7 @@ def edit_album(request, album_id):
             'comments': comments,
             'un_like': un_like,
             'user': user,
+            'messages': storage,
         })
 
 @login_required(login_url="beat:login")
@@ -246,7 +258,8 @@ def add_music(request, album_id):
                 instance.author = request.user
                 instance.album = album
                 instance.save()
-                return redirect('beat:detail', album.id)
+                messages.success(request, "Music Added Successfully!")
+                return redirect('beat:edit-album', album.id)
         else:
             form = MusicForm()
         return render(request, 'beat/add_music.html', {
@@ -263,7 +276,8 @@ def update_music(request, music_id):
             form = MusicForm(request.POST or None, request.FILES or None, instance=music)
             if form.is_valid():
                 form.save()
-                return redirect('beat:detail', music.album.id)
+                messages.success(request, "Musics Updated Successfully!")
+                return redirect('beat:edit-album', music.album.id)
         else:
             form = MusicForm(instance=music)
         return render(request, 'beat/add_music.html', {
@@ -278,6 +292,7 @@ def delete_music(request, music_id):
         music = get_object_or_404(Music, pk=music_id)
         if music.author == request.user:
             music.delete()
+            messages.success(request, "Music Deleted Successfully!")
             return redirect('beat:edit-album', music.album.id)
 
 @login_required(login_url="beat:login")
@@ -308,6 +323,7 @@ def update_video(request, video_id):
             form = VideoForm(request.POST or None, request.FILES or None, instance=video)
             if form.is_valid():
                 form.save()
+                messages.success(request, "Video Updated Successfully!")
                 return redirect('beat:detail-video', video.id)
         else:
             form = VideoForm(instance=video)
@@ -323,6 +339,7 @@ def delete_video(request, video_id):
         video = get_object_or_404(Video, pk=video_id)
         if video.author == request.user:
             video.delete()
+            messages.success(request, "Video Deleted Successfully!")
             return redirect('beat:edit-album', video.album.id)
 
 def index(request):
@@ -339,6 +356,7 @@ def index(request):
     })
 
 def detail(request, album_id):
+    storage = messages.get_messages(request)
     user = request.user
     #album = Album.objects.get(pk=album_id)
     album = get_object_or_404(Album, pk=album_id)
@@ -365,6 +383,7 @@ def detail(request, album_id):
         'comments': comments,
         'un_like': un_like,
         'user': user,
+        'messages': storage,
     })
 
 '''
@@ -392,6 +411,7 @@ def detail_music(request, music_id):
 '''
 
 def detail_video(request, video_id):
+    storage = messages.get_messages(request)
     #video = Video.objects.get(pk=video_id)
     video = get_object_or_404(Video, pk=video_id)
     video.views += 1
@@ -420,6 +440,7 @@ def detail_video(request, video_id):
         'album': album,
         'more_user_videos': more_user_videos,
         'all_more_videos': all_more_videos,
+        'messages': storage,
     })
 
 @login_required(login_url="beat:login")
@@ -480,10 +501,11 @@ def comment_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     if request.method == "GET":
         text = request.GET.get('comment_album')
-        if text == "":
-            return redirect('beat:detail', album.id)
+        #if text == "":
+        #    return redirect('beat:detail', album.id)
         comment = CommentAlbum.objects.create(user=request.user, album=album, text=text)
         comment.save()
+        messages.success(request, "Comment Added Successfully!")
         return redirect('beat:detail', album.id)
 
 @login_required(login_url="beat:login")
@@ -492,8 +514,11 @@ def comment_music(request, music_id):
     music = get_object_or_404(Music, pk=music_id)
     if request.method == "GET":
         text = request.GET.get('comment_music')
+        if text == "":
+            return redirect('beat:edit-album', music.id)
         comment = CommentMusic.objects.create(user=request.user, music=music, text=text)
         comment.save()
+        messages.success(request, "Comment Added Successfully!")
         return redirect('beat:detail-music', music.id)
 
 @login_required(login_url="beat:login")
@@ -508,6 +533,7 @@ def comment_video(request, video_id):
             return redirect('beat:detail-video', video.id)
         comment = CommentVideo.objects.create(user=request.user, video=video, text=text)
         comment.save()
+        messages.success(request, "Comment Added Successfully!")
         return redirect('beat:detail-video', video.id)
 
 @login_required(login_url="beat:login")
