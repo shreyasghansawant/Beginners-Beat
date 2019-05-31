@@ -62,19 +62,37 @@ ul li a:hover{
 #sb:active{
   background-color: green;
 }
+.messageit-d{
+  width: 98%;
+  padding: 13px 0px;
+  margin: 8px 13px;
+  border: 1px solid red;
+  color: red;
+  background-color: #FFEFD5;
+}
+.messageit-s{
+  width: 98%;
+  padding: 13px 0px;
+  margin: 8px 13px;
+  border: 1px solid green;
+  color: green;
+  background-color: lightgreen;
+  opacity: 0.7;
+}
+
 
 /* Mobile */
 
 @media only screen and (max-width: 600px) {
   ul li, #logout{
-    padding: 10px 18px;
+    padding: 10px 6px;
     border: 0.5px solid grey;
   }
   nav{
     flex-wrap: wrap;
   }
   #ssb{
-    width: 265px;
+    width: 150px;
   }
   #sf{
     padding-top: 2.5px;
@@ -84,6 +102,12 @@ ul li a:hover{
     font-size: 23px;
   }
   #for-mobile li{
-    padding: 10px 37px;
+    padding: 10px 21px;
+  }
+  .messageit-d{
+  width: 98%;
+  }
+  .messageit-s{
+    margin: 3px 2.5px;
   }
 }
