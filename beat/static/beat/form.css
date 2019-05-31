@@ -118,13 +118,16 @@ strong{
   margin: 5px;
   color: red;
 }
+.br-c{
+  display: none;
+}
 
 /* Mobile */
 
 @media only screen and (max-width: 600px) {
   .a{
     grid-template-columns: 100%;
-    margin-left: 15px;
+    margin-left: 0px;
   }
   .a1{
     font-size: 18px;
@@ -142,14 +145,14 @@ strong{
     float: left;
   }
   #lg-link-l{
-    margin-left: 65px;
+    margin-left: 5px;
   }
   #lg-link-g{
-    margin-left: 82px;
+    margin-left: 25px;
   }
   .a2{
     border: none;
-    margin-left: 25px;
+    margin-left: 0px;
   }
   .api-title{
     display: none;
@@ -162,10 +165,18 @@ strong{
   }
   #cp{
     margin: 0px;
-    margin-left: 50px;
+    margin-left: 20px;
   }
   #da{
     margin: 0px;
     margin-left: 10px
+  }
+  .api{
+    display: grid;
+    grid-template-columns: 40% 60%;
+    padding: 10px 15px;
+  }
+  .br-c{
+      display: block;
   }
 }
