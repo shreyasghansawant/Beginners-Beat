@@ -17,8 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Email
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'shreyasghansawant@gmail.com'
-EMAIL_HOST_PASSWORD = 'google{28032003}shreyas'
+EMAIL_HOST_USER = 'Email here'
+EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -26,7 +26,7 @@ EMAIL_USE_TLS = True
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$uwy==#g-au87l7f@1ifl#5ed*hk+n-xi@v=*z*j3un1_)(#o)'
+SECRET_KEY = '###############################################'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -145,15 +145,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'beat:api-user'
 
-SOCIAL_AUTH_GITHUB_KEY = 'e1249794475bafe08024'
-SOCIAL_AUTH_GITHUB_SECRET = '168d56c259e5572baf4094dc80511764bfb2f977'
+SOCIAL_AUTH_GITHUB_KEY = 'KEY'
+SOCIAL_AUTH_GITHUB_SECRET = 'SECRET_KEY'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '466739102444-80rbap2qnpoqe01qkbsnq1ab9f7uuhvq.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '51EO--asZvW7W9fAsyoCbZrB'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'KEY'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'SECRET_KEY'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '881700658836119'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'd095a538e6d0de1ce67bbd6ed9d48804'
+SOCIAL_AUTH_FACEBOOK_KEY = 'KEY'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'SECRET_KEY'
 
-SOCIAL_AUTH_INSTAGRAM_KEY = '2a7e2df4d6064dc8b09dae28d2039e0d'
-SOCIAL_AUTH_INSTAGRAM_SECRET = '655feaeadf6347c9a395896c56cc798d'
+SOCIAL_AUTH_INSTAGRAM_KEY = 'KEY'
+SOCIAL_AUTH_INSTAGRAM_SECRET = 'SECRET_KEY'
 sLOGIN_REDIRECT_INSTAGRAM_URL = 'beat:api-user'
