@@ -36,6 +36,9 @@
     {% endfor %}
   </div>
 
+  <div id="num_users">
+    {{ num_users|intcomma }} User{{ num_users|pluralize }}
+  </div>
   <div class="main-body-1-mobile">
     {% for user in users %}
     <a href="{% url 'beat:profile' user.id %}">
