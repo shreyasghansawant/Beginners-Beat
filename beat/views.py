@@ -346,6 +346,7 @@ def index(request):
     albums = Album.objects.all().order_by('-date', '-time')
     users = User.objects.all().order_by('?')
     musics = Music.objects.all().order_by('?')
+    num_users = User.objects.all().count()
     #albums = get_list_or_404(Album.objects.order_by('-date', '-time'))
     #users = get_list_or_404(User.objects.order_by('?'))
     #musics = get_list_or_404(Music.objects.order_by('?'))
@@ -353,6 +354,7 @@ def index(request):
         'albums': albums,
         'users': users,
         'musics': musics,
+        'num_users': num_users,
     })
 
 def detail(request, album_id):
