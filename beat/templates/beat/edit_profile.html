@@ -4,6 +4,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'beat/form.css' %}">
 
 {% block body %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="messageit-s">
+      <center>
+      <strong>{{ message }}</strong>
+    </div>
+  {% endfor %}
+{% endif %}
 <h1 class="title">Edit Profile</h1>
 <div>
   <form class="f" action="{% url 'beat:edit-profile' %}" method="post" enctype="multipart/form-data">
@@ -29,6 +37,9 @@
     {% endfor %}
     <button type="submit" id="button">Edit Profile</button>
   </form>
+  <br class="br-c">
+  <br class="br-c">
+  <br class="br-c">
   <a href="{% url 'beat:change-password' %}" id="cp">Change Password</a>
   <form action="{% url 'beat:delete-user' %}" method="post" id="da-f">
     {% csrf_token %}
