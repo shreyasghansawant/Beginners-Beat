@@ -43,6 +43,18 @@
   </div>
 
   <div class="main-body-2">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="messageit-s">
+          <center>
+          <strong>{{ message }}</strong>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <div class="messageit-s">
+          <center>
+          <strong>Comment Added Successfully!</strong>
+        </div>
     <div class="music-video">
       <div class="music">
         {% for music in musics %}
@@ -81,8 +93,7 @@
           <img src="{{ user.profile.dp.url }}" id="my-img-for-c" oncontextmenu="return false;">
         {% endif %}
         <!--<input type="text" name="comment_album" size="60" style="font-size:16pt;" id="comment-text-area">-->
-        <textarea name="comment_album" rows="2" cols="60" id="comment-text-area" style="font-size:13pt;"></textarea>
-        <textarea name="comment_album" rows="2" cols="37.5" id="comment-text-area-pro" style="font-size:13pt;"></textarea>
+        <textarea name="comment_album" rows="2" id="comment-text-area" style="font-size:13pt;"></textarea>
         <button type="submit" id="comment-btn">Comment</button>
         <br class="br-c">
         <br class="br-c">
