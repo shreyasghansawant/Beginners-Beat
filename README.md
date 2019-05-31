@@ -32,6 +32,6 @@ while playing the made music in it.
 3) Explaining how you created the music directly through video. 
 4) You can also share some cool videos created by you, just for fun. 
 
-If you have any problem, Feel Free to Contact Me :<br>
-Email: shreyasghansawant@gmail.com 
+If you have any problem, Feel Free to Contact Me : <br>
+Email: shreyasghansawant@gmail.com <br>
 Phone: 7620979186
