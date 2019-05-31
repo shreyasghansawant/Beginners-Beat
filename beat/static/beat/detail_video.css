@@ -277,7 +277,7 @@ body{
     grid-template-columns: 100%;
   }
   #videoit{
-    height: 280px;
+    height: 202.5px;
   }
   .main-body-1{
     padding: 0px;
@@ -317,5 +317,14 @@ body{
   }
   #my-img-for-c{
     margin-left: 0px;
+  }
+  #likeitbtn{
+    padding: 7px 35px;
+  }
+  #likeitbtn-u{
+    padding: 7px 30px;
+  }
+  #miniu{
+    margin: 15px 10px;
   }
 }
