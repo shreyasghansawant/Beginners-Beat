@@ -416,7 +416,7 @@ def detail_video(request, video_id):
     storage = messages.get_messages(request)
     #video = Video.objects.get(pk=video_id)
     video = get_object_or_404(Video, pk=video_id)
-    video.views += 1
+    video.views++
     video.save()
     album = get_object_or_404(Album, pk=video.album.id)
     more_videos = Video.objects.filter(album=album).order_by('?')
