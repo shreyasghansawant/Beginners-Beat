@@ -307,6 +307,7 @@ body{
   }
   #comment-text-area-pro{
     display: block;
+    width: 225px;
   }
   .comment-area{
     grid-template-columns: 17.5% 82.5%;
